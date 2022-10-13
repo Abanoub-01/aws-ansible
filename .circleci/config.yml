@@ -9,9 +9,6 @@ jobs:
         - image: python:3.7-alpine3.11
       steps:
         - checkout
-        - add_ssh_keys:
-                # You can get this ID in the section where you registered the SSH Key
-                fingerprints: ["76:39:28:6c:ea:d4:05:5d:30:cb:f8:b9:13:9d:1c:96"] 
         - run:
             name: Install Ansible
             command: |
@@ -19,7 +16,7 @@ jobs:
         - run:
             name: Run Playbook and Configure server
             command: |
-              ansible-playbook -i inventory main.yml
+              ansible-playbook -i inventory main.yml --private-key newkey.pem
 workflows:
   DeploymentFlow:
     jobs:
